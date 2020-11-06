@@ -1,3 +1,7 @@
+Important Guideline for Git:
+1) always remember git add, git commit your work no matter you finish or not
+2) use git status to check your edit before "git pull"
+
 Participant's Module & Committee Lead's Module
 This module will include:
 •    Participants & Committee Lead to view their training progress
