@@ -23,6 +23,11 @@ Gamification:
 
 
 WORK TO DO (edit by reshmi):
+Tan : object diagram, erd diagram
+Resh : sys arch diagram, use case
+Seb : activity diagram
+Jas : screen design
+
 
 front-end :
 1. committee main page
