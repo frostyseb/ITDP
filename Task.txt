@@ -1,0 +1,40 @@
+Participant's Module & Committee Lead's Module
+This module will include:
+•    Participants & Committee Lead to view their training progress
+•    Participants & Committee Lead  to view events
+•    Participants & Committee Lead  to join events 
+•    Committee Lead to provide feedback to Program Manager
+
+Program Manager's Module
+This module will include:
+•    Program Manager to view participant's training progress
+•    Program Manager to edit participant's training progress
+•    Program Manager to add events 
+•    Program Manager to view events
+•    Program Manager to edit events 
+•    Program Manager to view participant's level of engagement
+
+
+Gamification:
+- Motivate them to engage them in the activity
+- Discount for Dell's product
+- Dicsount for limited time/quantity
+
+
+front-end :
+1. committee main page
+2. program manager page
+3. login and sign up page
+
+
+back-end :
+1. database ERD.
+2. object diagram
+3. Construction of database
+4. php connection
+5. develop class for each module
+6. integration with front end
+
+diagram to do :
+1. Activity
+2. Object
