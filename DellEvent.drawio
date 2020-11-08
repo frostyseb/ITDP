@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-08T05:53:06.997Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63" etag="Kg8XbBRaSbENJ4Tur40h" version="13.9.2" type="gitlab" pages="6">
+<mxfile host="app.diagrams.net" modified="2020-11-08T05:53:56.804Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63" etag="buE1pBkIEXs-FYy3vWZA" version="13.9.2" type="gitlab" pages="5">
   <diagram id="42hmpi9smcqryP4wMvOb" name="System Architecture">
     <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -1067,14 +1067,6 @@
         <mxCell id="2HssygnoRWeI-F0pAfdb-87" value="+ connect()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="2HssygnoRWeI-F0pAfdb-80">
           <mxGeometry y="168" width="190" height="26" as="geometry" />
         </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="DAIJuBeWWKFV5FO3GZYB" name="Activity">
-    <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
-      <root>
-        <mxCell id="S6EH26gAtXmJUbK0J6dk-0" />
-        <mxCell id="S6EH26gAtXmJUbK0J6dk-1" parent="S6EH26gAtXmJUbK0J6dk-0" />
       </root>
     </mxGraphModel>
   </diagram>
