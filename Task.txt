@@ -1,4 +1,19 @@
-Participant's Module & Committee Lead's Module
+Important Guideline for Git: (Added by Ming)
+1) always remember git add, git commit your work no matter you finish or not
+2) use git status to check your edit before "git pull"
+
+The skill required: (Added by Ming)
+front end:
+1. html - bootstrap, column & row design concept
+2. js - custom function
+3. jquery - button toggle, speacial effect ...
+4. css
+back-end:
+1. mysql
+2. php
+3. jquery & js
+
+Participant's Module & Committee Lead's Module (Added by Reshmi)
 This module will include:
 •    Participants & Committee Lead to view their training progress
 •    Participants & Committee Lead  to view events
@@ -29,13 +44,13 @@ Seb : activity diagram
 Jas : screen design
 
 
-front-end :
+front-end : (Edited by Ming)
 1. committee main page
 2. program manager page
 3. login and sign up page
 
 
-back-end :
+back-end : (Edited by Ming)
 1. database ERD.
 2. object diagram
 3. Construction of database
