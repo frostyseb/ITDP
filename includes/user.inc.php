@@ -1,20 +1,20 @@
 <?php
 
 class User extends dbh {
-	private $tablename = " users ";
-	private $userDataArray = array();
+	public $tablename = " users ";
+	public $userDataArray = array();
 	
-	private $user_id;
-	private $user_name;
-	private $user_first_name;
-	private $user_last_name;
-	private $user_password;
-	private $user_email;
-	private $user_gender;
-	private $user_role_code;
+	public $user_id;
+	public $user_name;
+	public $user_first_name;
+	public $user_last_name;
+	public $user_password;
+	public $user_email;
+	public $user_gender;
+	public $user_role_code;
 	
-	private $insertUser;
-	private $updateUser;
+	public $insertUser;
+	public $updateUser;
 	
 	public function checkUser($udArray = array()){
 		if(!empty($udArray)){
@@ -137,5 +137,8 @@ class User extends dbh {
 		}
 	}
 }
+
+
+// select * FROM users a INNER JOIN ref_user_roles b on a.user_role_code = b.user_role
 
 ?>
