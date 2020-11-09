@@ -29,7 +29,13 @@ Class team extends Dbh{
 }
 
     public function get_team_by_user($uid){
-        
+                $stmt = $this->connect()->prepare("SELECT * FROM has_teams WHERE participant_id = ?");
+        $stmt->execute([$uid]);
+        if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $this->team_id = $row['team_id'];
+			}
+        }
     }
 
     public function get_team_by_team($team_id){

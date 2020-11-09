@@ -1,23 +1,45 @@
 <?php 
+
+session_start();
 include_once('../includes/fetchAttendance.php'); 
+include_once("../includes/dbh.inc.php");
+include_once("../includes/event.inc.php");
 include_once('../team_test2.php'); 
+include_once('../includes/team.inc.php');
 if(!isset($_SESSION['user_id'])){
     header('Location: login.php');
     exit();
 }
 
-$uid = 1;
+$uid = $_SESSION['user_id'];
 
 $trainingHrs = new Attendance;
 $trainingHrs->get_training_hours($uid);
 
-echo $_SESSION['user_name'];
-
+$event = new event;
+$hour_completed = $event->count_trained_hour($_SESSION['user_id']);
 $team = new team;
-$team->get_team_by_team(1);
+$team->get_team_by_user($_SESSION['user_id']);
+$team->get_team_by_team($team->team_id);
+
+$result = $team->get_team_role_code($_SESSION['user_id']);
+
+$event = new event;
+$train_events = $event->get_training();
+
+if($result == 1) {
+	$hideme = '#user {display: none;}';
+}
+else {
+	$hideme = '';
+}
 
 
 ?>
+
+<style>
+<?php echo $hideme ?>
+</style>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +103,8 @@ $team->get_team_by_team(1);
 								<li><?php echo $_SESSION['user_gender']?></li>
 								<li>Role:</li>
 								<li><?php echo $_SESSION['user_role_code']?></li>
+                                <li>User ID:</li>
+								<li><?php echo $_SESSION['user_id']?></li>
                             </ul>
                         </li>
                             </ul>
@@ -106,7 +130,7 @@ $team->get_team_by_team(1);
                             <div class="col-md-12">
 							<!-- TRAININGS DATA-->
                                 <h2 class="title-1 m-b-25">Trainings Details</h2>
-								<h6 class="title-5 m-b-25"> Hours completed : <?php echo $trainingHrs->training_hours?></h6>
+								<h6 class="title-5 m-b-25"> Hours completed : <?php echo $hour_completed?></h6>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -123,21 +147,23 @@ $team->get_team_by_team(1);
 										<?php   // LOOP TILL END OF DATA  
 											//while($rows=$result->fetch_assoc()) 
 											//{ 
+                                            foreach ($train_events as $event) {
 										?> 
 										END PHP-->
 										<tbody>
                                             <tr>
-                                                <td>test<!-- add in training name --></td>
-                                                <td>test<!-- add in start date--></td>
-                                                <td>test<!-- add in end date --></td>
-                                                <td>test<!-- add in status (pending, in progress, done)--></td>
-												<td>test<!-- add in description--></td>
+                                                <td><?php echo $event->event_name?></td>
+                                                <td><?php echo $event->event_start_date?></td>
+                                                <td><?php echo $event->event_end_date?></td>
+                                                <td><?php echo $event->event_status_description?></td>
+												<td><?php echo $event->other_details?></td>
 												<td> <button type="button" class="btn btn-secondary mb-1">
 															JOIN <!-- SCROLL DOWN TO FIND MODAL -->
 													</button>
 												</td>
                                             </tr>
 										</tbody>
+                                        <?php } ?>
                                     </table>
                                 </div>
                             </div>
@@ -219,7 +245,7 @@ $team->get_team_by_team(1);
                                 <!-- END EVENT DATA-->
                             </div>
 						
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" id="user">
                                 <!-- COMMITTEE-->
                                 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
                                     <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
@@ -275,7 +301,7 @@ $team->get_team_by_team(1);
                                 <!-- END COMMITTEE-->
                             </div>
 							
-							<div class="col-lg-6">
+							<div class="col-lg-6" id="user">
 								<div class="card">
 									<div class="card-header">
 										<strong>Committee Feedback</strong>

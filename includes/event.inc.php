@@ -80,10 +80,31 @@ Class event extends Dbh{
                 $event->comments = $row['comments'];
                 $event->other_details = $row['other_details'];
                 $event->total_hour_required = $row['total_hour_required'];
+                $event->event_start_date = $row['event_start_date'];
+                $event->event_end_date = $row['event_end_date'];
                 $event_list[] = $event;
 			}
         }
         return $event_list;
+    }
+
+    // SELECT * FROM attendances t1
+    // join events t2 ON t2.event_id = t1.event_id
+    // WHERE t1.user_id=2 AND t2.event_type_code=1
+
+    public function count_trained_hour($user_id){
+        $stmt = $this->connect()->prepare("SELECT SUM(hour_attended) AS num FROM attendances t1
+        join events t2 ON t2.event_id = t1.event_id
+        WHERE t1.user_id=? AND t2.event_type_code=1");
+        $stmt->execute([$user_id]);
+        $max;
+        if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $max = $row['num'];
+			}
+        }
+        if (!$max) $max = 0;
+        return $max;
     }
 
 
