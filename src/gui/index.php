@@ -1,4 +1,8 @@
-<?php include '../../includes/fetchAttendance.php'?>
+<?php 
+include_once('../../includes/fetchAttendance.php'); 
+$trainingHrs = new Attendance;
+$trainingHrs->get_training_hours($_SESSION['user_id']);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +88,7 @@
                             <div class="col-md-12">
 							<!-- TRAININGS DATA-->
                                 <h2 class="title-1 m-b-25">Trainings Details</h2>
-								<h6 class="title-5 m-b-25"> Hours completed : <?php echo $result?></h6>
+								<h6 class="title-5 m-b-25"> Hours completed : <?php echo $trainingHrs->training_hours?></h6>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
