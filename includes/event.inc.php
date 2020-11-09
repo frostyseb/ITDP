@@ -16,10 +16,34 @@ Class event extends Dbh{
     public $event_name;
     public $total_hour_required;
 
+
+
     public $joined_array = array();
     public $unjoin_array = array();
 
-    public function add_events(){
+    public function add_event(){
+		$insert_query =
+		"INSERT INTO". " events " .
+		"SET ".
+		"event_status_code = "         . $this->event_status_code  			    .   ", " .
+		"event_type_code = "    	    . $this->event_type_code			    .   ", " .
+		"event_start_date = '"          . $this->event_start_date               .   "', " .
+		"event_end_date = '"            . $this->event_end_date    	            .   "', " .
+		"number_of_participants = "    . $this->number_of_participants    	    .   ", " .
+		"discount = "                  . $this->discount    		            .   ", " .
+        "total_cost = "                . $this->total_cost    	                .   ", " .
+        "comments = '"                  . $this->comments   	                .   "', " .
+        "other_details = '"             . $this->other_details    	            .   "', " .
+		"event_name = '"                . $this->event_name                     .   "'"
+        ;
+        
+        $result = $this->connect()->query($insert_query);
+        if(result > 0){
+            echo '<script language="javascript">';
+            echo 'alert("Added Event!")';
+            echo '</script>';
+        }
+
 
     }
 
