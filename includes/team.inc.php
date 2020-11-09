@@ -17,9 +17,13 @@ Class team extends Dbh{
 
     }
 
-    public function get_team_by_team($uid){
+    public function get_team_by_user($uid){
+        
+    }
+
+    public function get_team_by_team($team_id){
         $stmt = $this->connect()->prepare("SELECT * FROM teams WHERE team_id = ?");
-        $stmt->execute([$uid]);
+        $stmt->execute([$team_id]);
         if($stmt->rowCount()) {
 			while ($row = $stmt->fetch()) {
                 $this->team_id = $row['team_id'];
@@ -47,8 +51,17 @@ Class team extends Dbh{
 
 
     public function join_team($user_id,$team_id,$team_role_code){
-
+        $sql = "SELECT COUNT(*) AS num FROM has_teams WHERE team_id=:team_id AND participant_id=:participant_id";
+        $stmt= $this->connect()->prepare($sql);
+        $stmt->bindParam(':team_id', $team_id);
+        $stmt->bindParam(':participant_id', $user_id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if((int)$row['num'] > 0){
+            return false;
+        }
         try {
+            
             $sql = "INSERT INTO has_teams (team_id, participant_id, team_role_code) VALUES (:team_id, :participant_id, :team_role_code)";
             $stmt= $this->connect()->prepare($sql);
             $stmt->bindParam(':team_id', $team_id);
@@ -56,9 +69,9 @@ Class team extends Dbh{
             $stmt->bindParam(':team_role_code', $team_role_code);
             $stmt->execute();
         }catch (Exception $e){
-            $pdo->rollback();
             throw $e;
         }
+        return true;
     }
 
     // public function join_team(){
