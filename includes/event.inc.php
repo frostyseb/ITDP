@@ -1,6 +1,6 @@
 <?php
 
-Class event extends dbh{
+Class event extends Dbh{
     public $event_id;
     public $event_status_code;
     public $event_status_description;
@@ -22,6 +22,18 @@ Class event extends dbh{
     public function add_events(){
 
     }
+
+    public function get_event_by_eventid($uid){
+        $stmt = $this->connect()->prepare("SELECT * FROM events WHERE event_id = ?");
+        $stmt->execute([$uid]);
+        if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $this->event_id = $row['event_id'];
+                $this->event_name = $row['event_name'];
+			}
+        }
+    }
+
 
     public function edit_events(){
         $stmt = $this->connect()->prepare(
