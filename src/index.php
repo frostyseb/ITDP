@@ -1,6 +1,7 @@
 <?php 
 include_once('../includes/fetchAttendance.php'); 
 include_once('../team_test2.php'); 
+include_once('../includes/team.inc.php');
 if(!isset($_SESSION['user_id'])){
     header('Location: login.php');
     exit();
@@ -16,8 +17,21 @@ echo $_SESSION['user_name'];
 $team = new team;
 $team->get_team_by_team(1);
 
+$result = $team->get_team_role_code($_SESSION['user_id']);
+
+if($result == 1) {
+	$hideme = '#user {display: none;}';
+}
+else {
+	$hideme = '';
+}
+
 
 ?>
+
+<style>
+<?php echo $hideme ?>
+</style>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -219,7 +233,7 @@ $team->get_team_by_team(1);
                                 <!-- END EVENT DATA-->
                             </div>
 						
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" id="user">
                                 <!-- COMMITTEE-->
                                 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
                                     <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
@@ -275,7 +289,7 @@ $team->get_team_by_team(1);
                                 <!-- END COMMITTEE-->
                             </div>
 							
-							<div class="col-lg-6">
+							<div class="col-lg-6" id="user">
 								<div class="card">
 									<div class="card-header">
 										<strong>Committee Feedback</strong>
