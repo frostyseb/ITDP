@@ -232,6 +232,15 @@ $team->get_team_by_team(1);
 											</p>
 										</div>
                                         <table class="table">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>User ID</th>
+													<th>User Role</th>
+												</tr>
+											</thead>
+										
+											<tbody>
 											<?php
 												foreach ($team->member_list as $member)
 												{
