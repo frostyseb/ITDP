@@ -113,6 +113,27 @@ class User extends dbh {
 		}
 		$this->setSession();
 	}
+
+	public function login() {
+		$stmt = $this->connect()->prepare("SELECT * FROM USERS WHERE user_name=:user_name AND user_password=:user_password");
+		$stmt->bindParam(':user_name', $this->user_name);
+        $stmt->bindParam(':user_password', $this->user_password);
+		$stmt->execute();
+		
+		if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+				$this->user_id = $row['user_id'];
+				$this->user_name = $row['user_name'];
+				$this->user_first_name = $row['user_first_name'];
+				$this->user_last_name = $row['user_last_name'];
+				$this->user_password = $row['user_password'];
+				$this->user_email = $row['user_email'];
+				$this->user_gender = $row['user_gender'];
+				$this->user_role_code = $row['user_role_code'];
+			}
+		}
+		$this->setSession();
+	}
 	
 	private function setSession() {
 		$_SESSION['user_id'] = $this->user_id;

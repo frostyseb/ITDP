@@ -1,10 +1,16 @@
 <?php 
 include_once('../includes/fetchAttendance.php'); 
+if(!isset($_SESSION['user_id'])){
+    header('Location: login.php');
+    exit();
+}
 
 $uid = 1;
 
 $trainingHrs = new Attendance;
 $trainingHrs->get_training_hours($uid);
+
+echo $_SESSION['user_name'];
 
 
 ?>
@@ -63,18 +69,21 @@ $trainingHrs->get_training_hours($uid);
 					<li class="has-sub">
                                 <h3>Profile</h3>
 								<br>
-								<li>Username</li>
-								<li><!-- add in username --></li>
-								<li>Name</li>
-								<li><!-- add in name --></li>
-								<li>Gender</li>
-								<li><!-- add in gender --></li>
-								<li>Role</li>
-								<li><!-- add in role--></li>
+								<li>Username:</li>
+								<li><?php echo $_SESSION['user_name']?></li>
+								<li>Name:</li>
+								<li><?php echo $_SESSION['user_first_name']." ".$_SESSION['user_last_name']?></li>
+								<li>Gender:</li>
+								<li><?php echo $_SESSION['user_gender']?></li>
+								<li>Role:</li>
+								<li><?php echo $_SESSION['user_role_code']?></li>
                             </ul>
                         </li>
                             </ul>
                         </li>
+                        <form action="logout.php">
+                            <input type="submit" value="Logout">
+                        </form>
                     </ul>
                 </nav>
             </div>

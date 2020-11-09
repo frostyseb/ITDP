@@ -1,3 +1,24 @@
+<?php
+include_once('../includes/dbh.inc.php');
+include_once('../includes/user.inc.php');
+
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(isset($_POST['login_form'])){
+        $user = new user;
+        $user->user_name = $_POST['user_name'];
+        $user->user_password = $_POST['user_password'];
+        //var_dump($event->get_event_array());
+        $user->login();
+        header('Location: index.php');
+    }
+
+    // header('Location: '.$_SERVER['REQUEST_URI']);
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,14 +68,18 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                            <input type="hidden" name="login_form" value="SET">
                                 <div class="form-group">
                                     <label>Username<label>
-                                    <input class="au-input au-input--full" type="username" name="username" placeholder="Username">
+                                    <input class="au-input au-input--full" type="username" name="user_name" placeholder="Username">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <input class="au-input au-input--full" type="password" name="user_password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <input class="au-input au-input--full" type="submit" name="submit">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
