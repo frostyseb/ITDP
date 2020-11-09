@@ -3,11 +3,17 @@
 session_start();
 
 include_once('dbh.inc.php');
+include_once('user.inc.php');
+include_once('event.inc.php');
+include_once('team.inc.php');
 
 class attendance extends Dbh {
 	
 	public $training_hours;
 	public $event_name;
+	public $team;
+	public $event;
+	public $user;
 	
 	
 	public function get_training_hours($uid) {
