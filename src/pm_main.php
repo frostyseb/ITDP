@@ -32,24 +32,7 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-	
-	<script>
-	function showUser(str) {
-	  if (str == "") {
-		document.getElementById("txtHint").innerHTML = "";
-		return;
-	  } else {
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-		  if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("txtHint").innerHTML = this.responseText;
-		  }
-		};
-		xmlhttp.open("GET","getuser.php?q="+str,true);
-		xmlhttp.send();
-	  }
-	}
-	</script>
+
 
 </head>
 
@@ -102,39 +85,6 @@
 					
                         <div class="row">
                             <div class="col-md-12">
-							<!-- TRAININGS DATA-->
-                                <h2 class="title-1 m-b-25">Program Manager Details</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>Username</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- PHP CODE TO FETCH DATA FROM ROWS
-										<?php   // LOOP TILL END OF DATA  
-											while($rows=$result->fetch_assoc()) 
-											{ 
-										?> 
-										END PHP-->
-										<tbody>
-                                            <tr>
-                                                <td>test<!-- add in username --></td>
-                                                <td>test<!-- add in first name--></td>
-                                                <td>test<!-- add in last name --></td>
-                                                <td>test<!-- email--></td>
-                                            </tr>
-										</tbody>
-                                    </table>
-                                </div>
-                            </div>
-							<!-- END TRAININGS DATA-->
-						</div>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <!-- EVENT DATA-->
                                 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
                                     <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
@@ -174,7 +124,7 @@
 						
 						<div class="row">
                             <div class="col-md-12">
-							<!-- TRAININGS DATA-->
+							<!-- EVENT CONFIGURATION DATA-->
                                 <h2 class="title-1 m-b-25">Event Configuration</h2>
 								<div class="table-data__tool-right">
 									<button class="au-btn au-btn-icon au-btn--blue au-btn--small" data-toggle="modal" data-target="#addEvent">add event</button>
@@ -200,8 +150,8 @@
                                         </thead>
                                         <!-- PHP CODE TO FETCH DATA FROM ROWS
 										<?php   // LOOP TILL END OF DATA  
-											while($rows=$result->fetch_assoc()) 
-											{ 
+											//while($rows=$result->fetch_assoc()) 
+											//{ 
 										?> 
 										END PHP-->
 										<tbody>
@@ -232,6 +182,56 @@
                                     </table>
                                 </div>
                             </div>
+						</div>
+
+						<div class="row">
+                            <div class="col-md-12">
+							<!-- PARTICIPANTS DATA-->
+                                <h2 class="title-1 m-b-25">Participants List</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>Username</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+												<th>Email</th>
+												<th>Gender</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- PHP CODE TO FETCH DATA FROM ROWS
+										<?php   // LOOP TILL END OF DATA  
+											//while($rows=$result->fetch_assoc()) 
+											//{ 
+										?> 
+										END PHP-->
+										<tbody>
+                                            <tr>
+                                                <td>test<!-- add in username --></td>
+                                                <td>test<!-- add in first name--></td>
+                                                <td>test<!-- add in last name --></td>
+												<td>test<!-- email--></td>
+												<td>test<!-- gender --></td>
+											</tr>
+											<tr>
+                                                <td>test<!-- add in username --></td>
+                                                <td>test<!-- add in first name--></td>
+                                                <td>test<!-- add in last name --></td>
+												<td>test<!-- email--></td>
+												<td>test<!-- gender --></td>
+											</tr>
+											<tr>
+                                                <td>test<!-- add in username --></td>
+                                                <td>test<!-- add in first name--></td>
+                                                <td>test<!-- add in last name --></td>
+												<td>test<!-- email--></td>
+												<td>test<!-- gender --></td>
+                                            </tr>
+										</tbody>
+                                    </table>
+                                </div>
+                            </div>
+							<!-- END PARTICIPANTS DATA-->
 						</div>
 					</div>
 				</div>

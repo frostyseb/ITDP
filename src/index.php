@@ -1,5 +1,5 @@
 <?php 
-include_once('../../includes/fetchAttendance.php'); 
+include_once('../includes/fetchAttendance.php'); 
 
 $uid = 1;
 
