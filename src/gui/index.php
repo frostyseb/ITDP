@@ -1,7 +1,12 @@
 <?php 
 include_once('../../includes/fetchAttendance.php'); 
+
+$uid = 1;
+
 $trainingHrs = new Attendance;
-$trainingHrs->get_training_hours($_SESSION['user_id']);
+$trainingHrs->get_training_hours($uid);
+
+
 ?>
 
 <!DOCTYPE html>
