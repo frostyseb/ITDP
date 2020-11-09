@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-09T04:11:34.412Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63" etag="GlugJbiGqQYDT05J4dQO" version="13.9.2" type="gitlab" pages="9">
+<mxfile host="app.diagrams.net" modified="2020-11-09T04:23:01.616Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63" etag="r0iNvqylPTM4FSPQw9tC" version="13.9.2" type="gitlab" pages="9">
   <diagram id="42hmpi9smcqryP4wMvOb" name="System Architecture">
     <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -1055,6 +1055,15 @@
             <mxPoint x="820" y="414" as="sourcePoint" />
             <mxPoint x="914" y="282" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="pjqiNBzx1DwgwYo-u52Y-74" value="Teams" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="pjqiNBzx1DwgwYo-u52Y-1">
+          <mxGeometry x="540" y="740" width="176" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="pjqiNBzx1DwgwYo-u52Y-75" value="Team_ID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="pjqiNBzx1DwgwYo-u52Y-74">
+          <mxGeometry y="26" width="176" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pjqiNBzx1DwgwYo-u52Y-76" value="Team_Name" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="pjqiNBzx1DwgwYo-u52Y-74">
+          <mxGeometry y="52" width="176" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
