@@ -104,61 +104,61 @@ Class feedback extends Dbh{
     // join teams t7 ON t7.team_id = t1.team_id
     // WHERE committee_lead_id=2
 
-    public function get_feedback_committee_lead($committee_lead_id) {
-		$stmt = $this->connect()->prepare("SELECT * FROM feedbacks t1
-        JOIN users t2 ON t2.user_id = t1.participant_id
-        JOIN users t3 ON t3.user_id = t1.committee_lead_id
-        JOIN events t4 ON t4.event_id = t1.event_id
-        join ref_event_types t5 ON t5.event_type_code = t4.event_type_code
-        join ref_event_status t6 ON t6.event_status_code = t4.event_status_code
-        join teams t7 ON t7.team_id = t1.team_id
-        WHERE committee_lead_id=:committee_lead_id
-        ");
-        $stmt->bindParam(':committee_lead_id', $committee_lead_id);
-        $stmt->execute();
-        $feedback_list;
-		if($stmt->rowCount()) {
-			while($row = $stmt->fetch()){
-                $event = new event;
-                $team = new team;
-                $committee = new user;
+    // public function get_feedback_committee_lead($committee_lead_id) {
+	// 	$stmt = $this->connect()->prepare("SELECT * FROM feedbacks t1
+    //     JOIN users t2 ON t2.user_id = t1.participant_id
+    //     JOIN users t3 ON t3.user_id = t1.committee_lead_id
+    //     JOIN events t4 ON t4.event_id = t1.event_id
+    //     join ref_event_types t5 ON t5.event_type_code = t4.event_type_code
+    //     join ref_event_status t6 ON t6.event_status_code = t4.event_status_code
+    //     join teams t7 ON t7.team_id = t1.team_id
+    //     WHERE committee_lead_id=:committee_lead_id
+    //     ");
+    //     $stmt->bindParam(':committee_lead_id', $committee_lead_id);
+    //     $stmt->execute();
+    //     $feedback_list;
+	// 	if($stmt->rowCount()) {
+	// 		while($row = $stmt->fetch()){
+    //             $event = new event;
+    //             $team = new team;
+    //             $committee = new user;
 
-                $event->event_id= $row['event_id'];
-                $event->event_status_code= $row['event_status_code'];
-                $event->event_status_description= $row['event_status_description'];
-                $event->event_type_code= $row['event_type_code'];
-                $event->event_type_description= $row['event_type_description'];
-                $event->event_start_date= $row['event_start_date'];
-                $event->event_end_date= $row['event_end_date'];
-                $event->number_of_participants= $row['number_of_participants'];
-                $event->discount= $row['discount'];
-                $event->total_cost= $row['total_cost'];
-                $event->comments= $row['comments'];
-                $event->other_details= $row['other_details'];
-                $event->event_name= $row['event_name'];
-                $event->total_hour_required= $row['total_hour_required'];
+    //             $event->event_id= $row['event_id'];
+    //             $event->event_status_code= $row['event_status_code'];
+    //             $event->event_status_description= $row['event_status_description'];
+    //             $event->event_type_code= $row['event_type_code'];
+    //             $event->event_type_description= $row['event_type_description'];
+    //             $event->event_start_date= $row['event_start_date'];
+    //             $event->event_end_date= $row['event_end_date'];
+    //             $event->number_of_participants= $row['number_of_participants'];
+    //             $event->discount= $row['discount'];
+    //             $event->total_cost= $row['total_cost'];
+    //             $event->comments= $row['comments'];
+    //             $event->other_details= $row['other_details'];
+    //             $event->event_name= $row['event_name'];
+    //             $event->total_hour_required= $row['total_hour_required'];
                 
-                $team->team_id = $row['team_id'];
-                $team->team_name = $row['team_name'];
+    //             $team->team_id = $row['team_id'];
+    //             $team->team_name = $row['team_name'];
 
-                $query = "SELECT * FROM feedbacks t1
-                JOIN users t2 ON t2.user_id = t1.participant_id
-                WHERE committee_lead_id=:committee_lead_id";
-                $stmt = $this->connect()->prepare($query);
-                $stmt->bindParam(':committee_lead_id', $committee_lead_id);
-                $stmt->execute();
+    //             $query = "SELECT * FROM feedbacks t1
+    //             JOIN users t2 ON t2.user_id = t1.participant_id
+    //             WHERE committee_lead_id=:committee_lead_id";
+    //             $stmt = $this->connect()->prepare($query);
+    //             $stmt->bindParam(':committee_lead_id', $committee_lead_id);
+    //             $stmt->execute();
 
                 
 
-                $feedback_list[] = array(
-                    'event' => $event,
-                    'team' => $team,
-                    'committee' => $user,
-                    'feedback' => $row['feedback']
-                );
-            }
-            return $feedback_list;
-		}
+    //             $feedback_list[] = array(
+    //                 'event' => $event,
+    //                 'team' => $team,
+    //                 'committee' => $user,
+    //                 'feedback' => $row['feedback']
+    //             );
+    //         }
+    //         return $feedback_list;
+	// 	}
 		
-	}
+	// }
 }
