@@ -32,24 +32,7 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-	
-	<script>
-	function showUser(str) {
-	  if (str == "") {
-		document.getElementById("txtHint").innerHTML = "";
-		return;
-	  } else {
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-		  if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("txtHint").innerHTML = this.responseText;
-		  }
-		};
-		xmlhttp.open("GET","getuser.php?q="+str,true);
-		xmlhttp.send();
-	  }
-	}
-	</script>
+
 
 </head>
 
@@ -167,8 +150,8 @@
                                         </thead>
                                         <!-- PHP CODE TO FETCH DATA FROM ROWS
 										<?php   // LOOP TILL END OF DATA  
-											while($rows=$result->fetch_assoc()) 
-											{ 
+											//while($rows=$result->fetch_assoc()) 
+											//{ 
 										?> 
 										END PHP-->
 										<tbody>
@@ -218,8 +201,8 @@
                                         </thead>
                                         <!-- PHP CODE TO FETCH DATA FROM ROWS
 										<?php   // LOOP TILL END OF DATA  
-											while($rows=$result->fetch_assoc()) 
-											{ 
+											//while($rows=$result->fetch_assoc()) 
+											//{ 
 										?> 
 										END PHP-->
 										<tbody>
