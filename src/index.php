@@ -27,6 +27,7 @@ $result = $team->get_team_role_code($_SESSION['user_id']);
 $event = new event;
 $train_events = $event->get_training();
 $joined_events = $event->get_joined_event($_SESSION['user_id']);
+$unjoin_events = $event->get_unjoin_event($_SESSION['user_id']);
 
 // if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //     if(isset($_POST['join_form'])){
@@ -182,43 +183,6 @@ else {
                             </div>
 							<!-- END TRAININGS DATA-->
 						</div>
-                                <!-- Joined DATA-->
-                                <h2 class="title-1 m-b-25">Joined Events</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>Event Name</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Status</th>
-												<th>Description</th>
-                                                <th>Event Type</th>
-												<th></th>
-                                            </tr>
-                                        </thead>
-                                        <!-- PHP CODE TO FETCH DATA FROM ROWS
-										<?php   // LOOP TILL END OF DATA  
-											//while($rows=$result->fetch_assoc()) 
-											//{ 
-                                            foreach ($joined_events as $event) {
-										?> 
-										END PHP-->
-										<tbody>
-                                            <tr>
-                                                <td><?php echo $event->event_name?></td>
-                                                <td><?php echo $event->event_start_date?></td>
-                                                <td><?php echo $event->event_end_date?></td>
-                                                <td><?php echo $event->event_status_description?></td>
-												<td><?php echo $event->other_details?></td>
-                                                <td><?php echo $event->event_type_description?></td>
-                                            </tr>
-										</tbody>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </div>
-							<!-- END TRAININGS DATA-->	
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- EVENT DATA-->
@@ -247,36 +211,54 @@ else {
 											?> 
 											END PHP-->
                                             <tbody>
+                                                                                    <!-- PHP CODE TO FETCH DATA FROM ROWS
+										<?php   // LOOP TILL END OF DATA  
+											//while($rows=$result->fetch_assoc()) 
+											//{ 
+                                            foreach ($joined_events as $event) {
+										?> 
+										END PHP-->
+										<tbody>
+                                            <tr>
+                                                <td><?php echo $event->event_name?></td>
+                                                <td><?php echo $event->event_start_date?></td>
+                                                <td><?php echo $event->other_details?></td>
+                                                <td><?php echo $event->event_status_description?></td>
+												
+                                            </tr>
+										</tbody>
+                                        <?php } ?>
 											<?php
 											
-												$records = mysqli_query($con,"select * from events"); // fetch data from database
+												// $records = mysqli_query($con,"select * from events"); // fetch data from database
 
-												while($data = mysqli_fetch_array($records))
-												{
+												// while($data = mysqli_fetch_array($records))
+												// {
+                                                    foreach ($unjoin_events as $event) {
 											?>
                                             <form action="join_event.php" method="POST">
                                             
                                                 <tr>
                                                     <td>
                                                         <div class="table-data__info">
-                                                            <h6><?php echo $data['event_name'] ?></h6>
-                                                            <input type="hidden" name="event_id" value="<?php echo $data['event_id'] ?>">
+                                                            <h6><?php echo $event->event_name?></h6>
+                                                            <input type="hidden" name="event_id" value="<?php echo $event->event_id?>">
                                                             <input type="hidden" name="join_form" value="SET">
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="table-data__info">
-                                                            <h6><?php echo $data['event_start_date'] ?></h6>
+                                                            <h6><?php echo $event->event_start_date?></h6>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="table-data__info">
-                                                            <h6><?php echo $data['other_details'] ?></h6>
+                                                            <h6><?php echo $event->other_details?></h6>
                                                         </div>
                                                     </td>
 													<td>
                                                         <div class="table-data__info">
-                                                            <h6><?php echo $data['number_of_participants'] ?></h6>
+                                                            <h6><?php echo $event->event_status_description?></h6>
                                                         </div>
                                                     </td>
 													<td>
