@@ -145,23 +145,22 @@ Class event extends Dbh{
         return unserialize((base64_decode($_SESSION['event_name'])));
     }
 
-    public function join_event($user_id,$event_id,$hours_attended){
-        $sql = "SELECT COUNT(*) AS num FROM attendance WHERE user_id=:user_id AND event_id=:event_id";
-        $stmt= $this->connect()->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->bindParam(':event_id', $event_id);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if((int)$row['num'] > 0){
-            return false;
-        }
+    public function join_event($user_id,$event_id){
+        // $sql = "SELECT COUNT(*) AS num FROM attendance WHERE user_id=:user_id AND event_id=:event_id";
+        // $stmt= $this->connect()->prepare($sql);
+        // $stmt->bindParam(':user_id', $user_id);
+        // $stmt->bindParam(':event_id', $event_id);
+        // $stmt->execute();
+        // $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        // if((int)$row['num'] > 0){
+        //     return false;
+        // }
         try {
             
-            $sql = "INSERT INTO has_teams (team_id, participant_id, team_role_code) VALUES (:team_id, :participant_id, :team_role_code)";
+            $sql = "INSERT INTO has_attend (user_id, event_id) VALUES (:user_id, :event_id)";
             $stmt= $this->connect()->prepare($sql);
-            $stmt->bindParam(':team_id', $team_id);
-            $stmt->bindParam(':participant_id', $user_id);
-            $stmt->bindParam(':team_role_code', $team_role_code);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':event_id', $event_id);
             $stmt->execute();
         }catch (Exception $e){
             throw $e;
@@ -171,6 +170,39 @@ Class event extends Dbh{
 
     public function get_event(){
 
+    }
+
+    // SELECT * FROM has_attend t1
+    //     join events t2 ON t2.event_id = t1.event_id
+    //     join ref_event_types t3 ON t3.event_type_code = t2.event_type_code
+    //     join ref_event_status t4 ON t4.event_status_code = t2.event_status_code
+    //     WHERE t1.user_id = 3
+
+    public function get_joined_event($uid){
+        $query = "SELECT * FROM has_attend t1 join events t2 ON t2.event_id = t1.event_id join ref_event_types t3 ON t3.event_type_code = t2.event_type_code join ref_event_status t4 ON t4.event_status_code = t2.event_status_code WHERE t1.user_id = ?";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute([$uid]);
+		if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $eventObj= new event();
+                $eventObj->event_id= $row['event_id'];
+                $eventObj->event_status_code= $row['event_status_code'];
+                $eventObj->event_status_description= $row['event_status_description'];
+                $eventObj->event_type_code= $row['event_type_code'];
+                $eventObj->event_type_description= $row['event_type_description'];
+                $eventObj->event_start_date= $row['event_start_date'];
+                $eventObj->event_end_date= $row['event_end_date'];
+                $eventObj->number_of_participants= $row['number_of_participants'];
+                $eventObj->discount= $row['discount'];
+                $eventObj->total_cost= $row['total_cost'];
+                $eventObj->comments= $row['comments'];
+                $eventObj->other_details= $row['other_details'];
+                $eventObj->event_name= $row['event_name'];
+                $eventObj->total_hour_required= $row['total_hour_required'];
+				$this->joined_array[] = $eventObj;
+			}
+        } 
+        return $this->joined_array;
     }
 
     public function get_all_event($uid){
