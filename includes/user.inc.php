@@ -54,6 +54,7 @@ class User extends dbh {
 		$this->user_password = $this->userDataArray['user_password'];
 		$this->user_email = $this->userDataArray['user_email'];
 		$this->user_gender = $this->userDataArray['user_gender'];
+		$this->user_role_code = $this->userDataArray['user_role_code'];
 		 
 		$this->user_id = 
 		"SELECT * FROM" .$this->tableName. 
@@ -69,8 +70,7 @@ class User extends dbh {
 		"user_password = '"     . $this->user_password    	.   "', " .
 		"user_email = '"        . $this->user_email    		.   "', " .
 		"user_gender = '"       . $this->user_gender    	.   "', " .
-		"created = '"      . date("Y-m-d H:i:s") . "', ".
-		"modified = '"     . date("Y-m-d H:i:s") . "' "
+		"user_role_code = '"       . $this->user_role_code
 		;
 
 		$this->updateUser = 
@@ -81,8 +81,8 @@ class User extends dbh {
 		"user_last_name = '"    . $this->user_last_name    	.   "', " .
 		"user_email = '"        . $this->user_email    		.   "', " .
 		"user_password = '"     . $this->password    		.   "', " .
-		"user_gender = '"        . $this->user_gender    	.   "', " .
-		"modified = '"     . date("Y-m-d H:i:s") . "' ".
+		"user_gender = '"       . $this->user_gender    	.   "', " .
+		"user_role_code = '"    . $this->user_role_code    	.   "', " .
 		"WHERE ".
 		"user_id ='"       .   $this->user_id    .   "'"
 		;
@@ -120,19 +120,16 @@ class User extends dbh {
 		$_SESSION['user_last_name'] = $this->user_last_name;
 		$_SESSION['user_email'] = $this->user_email;
 		switch($this->user_gender) {
-			case 'M':
+			case 'F':
 				$_SESSION['user_gender'] = 'Female';
 				break;
-			case 'F':
+			case 'M':
 				$_SESSION['user_gender'] = 'Male';
 				break;
 		}
 		switch($this->user_role_code) {
-			case 0:
-				$_SESSION['user_role_code'] = 'Participant';
-				break;
 			case 1:
-				$_SESSION['user_role_code'] = 'Committee Lead';
+				$_SESSION['user_role_code'] = 'Participant';
 				break;
 			case 2:
 				$_SESSION['user_role_code'] = 'Program Manager';
