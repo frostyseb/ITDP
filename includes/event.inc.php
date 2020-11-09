@@ -58,6 +58,34 @@ Class event extends Dbh{
         }
     }
 
+    public function get_training(){
+        $stmt = $this->connect()->prepare("        SELECT * FROM events t1
+        join ref_event_types t2 ON t2.event_type_code = t1.event_type_code
+        join ref_event_status t3 ON t3.event_status_code = t1.event_status_code
+        WHERE t1.event_type_code = ?");
+        $stmt->execute([1]);
+        if($stmt->rowCount()) {
+            $event_list = array();
+			while ($row = $stmt->fetch()) {
+                $event = new event;
+                $event->event_id = $row['event_id'];
+                $event->event_name = $row['event_name'];
+                $event->event_status_code = $row['event_status_code'];
+                $event->event_status_description = $row['event_status_description'];
+                $event->event_type_description = $row['event_type_description'];
+                $event->event_type_code = $row['event_type_code'];
+                $event->number_of_participants = $row['number_of_participants'];
+                $event->discount = $row['discount'];
+                $event->total_cost = $row['total_cost'];
+                $event->comments = $row['comments'];
+                $event->other_details = $row['other_details'];
+                $event->total_hour_required = $row['total_hour_required'];
+                $event_list[] = $event;
+			}
+        }
+        return $event_list;
+    }
+
 
     public function edit_events(){
         $stmt = $this->connect()->prepare(
