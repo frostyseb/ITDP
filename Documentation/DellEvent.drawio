@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-09T03:15:44.217Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63" etag="lpNkdoEXkglr0hG3xChk" version="13.9.2" type="gitlab" pages="8">
+<mxfile host="app.diagrams.net" modified="2020-11-09T03:29:41.044Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63" etag="JFEArzYIljEiGEt4Nuon" version="13.9.2" type="gitlab" pages="8">
   <diagram id="42hmpi9smcqryP4wMvOb" name="System Architecture">
-    <mxGraphModel dx="700" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="m0zpFN_349LRXy_pLj0v-0" />
         <mxCell id="m0zpFN_349LRXy_pLj0v-1" parent="m0zpFN_349LRXy_pLj0v-0" />
@@ -115,7 +115,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="ERD - Complete">
-    <mxGraphModel dx="700" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -378,7 +378,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="SVLPnnShHF7QGtF0dBgc" name="Class Diagram - Complete">
-    <mxGraphModel dx="1108" dy="1309" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="1621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="mcE1hDYlNpBtNuXheTGe-0" />
         <mxCell id="mcE1hDYlNpBtNuXheTGe-1" parent="mcE1hDYlNpBtNuXheTGe-0" />
@@ -654,7 +654,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="ERD - Simplify" id="-HNzUpwJabiewZs2_KfM">
-    <mxGraphModel dx="700" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="X7Iy3C7mPsO7oN9r1TIM-0" />
         <mxCell id="X7Iy3C7mPsO7oN9r1TIM-1" parent="X7Iy3C7mPsO7oN9r1TIM-0" />
@@ -839,7 +839,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Class Diagram - Simplify" id="gCK2ZkmAMvhQcmNcqkyg">
-    <mxGraphModel dx="1108" dy="482" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="2HssygnoRWeI-F0pAfdb-0" />
         <mxCell id="2HssygnoRWeI-F0pAfdb-1" parent="2HssygnoRWeI-F0pAfdb-0" />
@@ -1094,7 +1094,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="o1IUhWHatPukmTny8dTR" name="Activity Diagram - Participant Module">
-    <mxGraphModel dx="2007" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2512" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="GgjeqE2i0xXOFAnpe3fm-0" />
         <mxCell id="GgjeqE2i0xXOFAnpe3fm-1" parent="GgjeqE2i0xXOFAnpe3fm-0" />
@@ -1384,7 +1384,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="MwpOkCddV9xkQnQ_C-Pw" name="Activity Diagram - Committee Lead Module">
-    <mxGraphModel dx="1958" dy="482" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2512" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="5Wa7xeG9Oxl-AbqHNhul-0" />
         <mxCell id="5Wa7xeG9Oxl-AbqHNhul-1" parent="5Wa7xeG9Oxl-AbqHNhul-0" />
