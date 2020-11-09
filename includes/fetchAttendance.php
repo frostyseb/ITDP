@@ -2,15 +2,16 @@
 
 session_start();
 
-
+include_once('dbh.inc.php');
 
 class attendance extends Dbh {
 	
 	public $training_hours;
 	
-	public function get_training_hours($_SESSION('user_id') {
-		$stmt = $this->connect->prepare("SELECT attendances.hour_attended FROM attendances INNER JOIN events ON attendances.event_id = events.event_id WHERE attendances.user_id = ? AND events.event_type_code = 1");
-		$stmt->execute([$_SESSION['user_id']]);
+	
+	public function get_training_hours($uid) {
+		$stmt = $this->connect()->prepare("SELECT attendances.hour_attended FROM attendances INNER JOIN events ON attendances.event_id = events.event_id WHERE attendances.user_id = ? AND events.event_type_code = 1");
+		$stmt->execute([$uid]);
 		if($stmt->rowCount()) {
 			while($row = $stmt->fetch()) {
 				$this->training_hours = $row['hour_attended'];
