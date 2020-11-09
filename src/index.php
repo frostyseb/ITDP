@@ -2,6 +2,7 @@
 include_once('../includes/fetchAttendance.php'); 
 include_once("../includes/dbh.inc.php");
 include_once("../includes/event.inc.php");
+include_once('../team_test2.php'); 
 if(!isset($_SESSION['user_id'])){
     header('Location: login.php');
     exit();
@@ -16,6 +17,9 @@ echo $_SESSION['user_name'];
 
 $event = new event;
 $hour_completed = $event->count_trained_hour($_SESSION['user_id']);
+$team = new team;
+$team->get_team_by_team(1);
+
 
 ?>
 
@@ -232,20 +236,39 @@ $hour_completed = $event->count_trained_hour($_SESSION['user_id']);
 											</p>
 										</div>
                                         <table class="table">
-											<!-- PHP CODE TO FETCH DATA FROM ROWS
-											<?php   // LOOP TILL END OF DATA  
-												//while($rows=$result->fetch_assoc()) 
-												//{ }
-											?> 
-											END PHP-->
-                                            <tbody>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>User ID</th>
+													<th>User Role</th>
+												</tr>
+											</thead>
+										
+											<tbody>
+											<?php
+												foreach ($team->member_list as $member)
+												{
+											?>
                                                 <tr>
                                                     <td>
                                                         <div class="table-data__info">
-                                                            <h6>test<!-- add in name --></h6>
+                                                            <h6><?php echo $member->user_first_name . " " . $member->user_last_name ?>   </h6>
+                                                        </div>
+                                                    </td>
+													<td>
+                                                        <div class="table-data__info">
+                                                            <h6><?php echo $member->user_id ?></h6>
+                                                        </div>
+                                                    </td>
+													<td>
+                                                        <div class="table-data__info">
+                                                            <h6><?php echo $member->team_role ?></h6>
                                                         </div>
                                                     </td>
                                                 </tr>
+												<?php 
+												}
+												?>
                                             </tbody>
                                         </table>
                                     </div>

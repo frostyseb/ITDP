@@ -1,6 +1,7 @@
 <?php
 
 Class team extends Dbh{
+	public $t_r_c;
     public $team_id;
     public $team_name;
     public $member_list = array();
@@ -16,6 +17,16 @@ Class team extends Dbh{
 
 
     }
+
+	public function get_team_role_code($uid){
+	$stmt = $this->connect()->prepare("SELECT * FROM has_teams WHERE participant_id = ?");
+	$stmt->execute([$uid]);
+	if($stmt->rowCount()) {
+		while ($row = $stmt->fetch()) {
+			$this->t_r_c = $row['team_role_code'];
+		}
+	}
+}
 
     public function get_team_by_user($uid){
         
