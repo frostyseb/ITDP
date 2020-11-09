@@ -1,7 +1,10 @@
 <?php
 
-
 session_start();
+
+class attendance extends Dbh {
+	public function get_training_hours(
+}
 
 $servername = "localhost";
 $username = "root";
