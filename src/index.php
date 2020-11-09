@@ -1,17 +1,21 @@
 <?php 
 include_once('../includes/fetchAttendance.php'); 
+include_once("../includes/dbh.inc.php");
+include_once("../includes/event.inc.php");
 if(!isset($_SESSION['user_id'])){
     header('Location: login.php');
     exit();
 }
 
-$uid = 1;
+$uid = $_SESSION['user_id'];
 
 $trainingHrs = new Attendance;
 $trainingHrs->get_training_hours($uid);
 
 echo $_SESSION['user_name'];
 
+$event = new event;
+$hour_completed = $event->count_trained_hour($_SESSION['user_id']);
 
 ?>
 
@@ -102,7 +106,7 @@ echo $_SESSION['user_name'];
                             <div class="col-md-12">
 							<!-- TRAININGS DATA-->
                                 <h2 class="title-1 m-b-25">Trainings Details</h2>
-								<h6 class="title-5 m-b-25"> Hours completed : <?php echo $trainingHrs->training_hours?></h6>
+								<h6 class="title-5 m-b-25"> Hours completed : <?php echo $hour_completed?></h6>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
