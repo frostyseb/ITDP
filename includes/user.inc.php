@@ -12,6 +12,7 @@ class User extends dbh {
 	public $user_email;
 	public $user_gender;
 	public $user_role_code;
+	public $team_role_description;
 	
 	public $insertUser;
 	public $updateUser;
