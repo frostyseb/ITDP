@@ -1,0 +1,4 @@
+SELECT * FROM feedbacks t1
+        join users t2 ON t2.user_id = t1.participant_id
+        join users t3 ON t3.user_id = t1.committee_lead_id
+        join events t4 ON t4.event_id = t1.event_id
