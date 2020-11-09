@@ -145,6 +145,30 @@ Class event extends Dbh{
         return unserialize((base64_decode($_SESSION['event_name'])));
     }
 
+    public function join_event($user_id,$event_id,$hours_attended){
+        $sql = "SELECT COUNT(*) AS num FROM attendance WHERE user_id=:user_id AND event_id=:event_id";
+        $stmt= $this->connect()->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':event_id', $event_id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if((int)$row['num'] > 0){
+            return false;
+        }
+        try {
+            
+            $sql = "INSERT INTO has_teams (team_id, participant_id, team_role_code) VALUES (:team_id, :participant_id, :team_role_code)";
+            $stmt= $this->connect()->prepare($sql);
+            $stmt->bindParam(':team_id', $team_id);
+            $stmt->bindParam(':participant_id', $user_id);
+            $stmt->bindParam(':team_role_code', $team_role_code);
+            $stmt->execute();
+        }catch (Exception $e){
+            throw $e;
+        }
+        return true;
+    }
+
     public function get_event(){
 
     }
