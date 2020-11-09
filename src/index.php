@@ -1,17 +1,14 @@
 <?php 
 include_once('../includes/fetchAttendance.php'); 
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-    exit();
-}
+include_once('../team_test2.php'); 
 
 $uid = 1;
-
 $trainingHrs = new Attendance;
 $trainingHrs->get_training_hours($uid);
 
-echo $_SESSION['user_name'];
 
+$team = new team;
+$team->get_team_by_team(1);
 
 ?>
 
@@ -69,21 +66,18 @@ echo $_SESSION['user_name'];
 					<li class="has-sub">
                                 <h3>Profile</h3>
 								<br>
-								<li>Username:</li>
-								<li><?php echo $_SESSION['user_name']?></li>
-								<li>Name:</li>
-								<li><?php echo $_SESSION['user_first_name']." ".$_SESSION['user_last_name']?></li>
-								<li>Gender:</li>
-								<li><?php echo $_SESSION['user_gender']?></li>
-								<li>Role:</li>
-								<li><?php echo $_SESSION['user_role_code']?></li>
+								<li>Username</li>
+								<li><!-- add in username --></li>
+								<li>Name</li>
+								<li><!-- add in name --></li>
+								<li>Gender</li>
+								<li><!-- add in gender --></li>
+								<li>Role</li>
+								<li><!-- add in role--></li>
                             </ul>
                         </li>
                             </ul>
                         </li>
-                        <form action="logout.php">
-                            <input type="submit" value="Logout">
-                        </form>
                     </ul>
                 </nav>
             </div>
@@ -228,20 +222,38 @@ echo $_SESSION['user_name'];
 											</p>
 										</div>
                                         <table class="table">
-											<!-- PHP CODE TO FETCH DATA FROM ROWS
-											<?php   // LOOP TILL END OF DATA  
-												//while($rows=$result->fetch_assoc()) 
-												//{ }
-											?> 
-											END PHP-->
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Team Role</th>
+													<th>User ID</th>
+												</tr>
+											</thead>
                                             <tbody>
+											<?php
+												foreach ($team->member_list as $member)
+												{
+											?>
                                                 <tr>
                                                     <td>
                                                         <div class="table-data__info">
-                                                            <h6>test<!-- add in name --></h6>
+                                                            <h6><?php echo $member->user_first_name . " " . $member->user_last_name ?>   </h6>
+                                                        </div>
+                                                    </td>
+													<td>
+                                                        <div class="table-data__info">
+                                                            <h6><?php echo $member->user_id ?></h6>
+                                                        </div>
+                                                    </td>
+													<td>
+                                                        <div class="table-data__info">
+                                                            <h6><?php echo $member->team_role ?></h6>
                                                         </div>
                                                     </td>
                                                 </tr>
+												<?php 
+												}
+												?>
                                             </tbody>
                                         </table>
                                     </div>
