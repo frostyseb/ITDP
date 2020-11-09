@@ -3,11 +3,7 @@
 Class team extends Dbh{
     public $team_id;
     public $team_name;
-    public $committe_lead_id;
-    public $committe_lead_name;
-    public $member_ids = array();
-    public $member_names = array();
-
+    public $member_list = array();
 
     public function create_team(){
 		$insert_query =
@@ -21,7 +17,7 @@ Class team extends Dbh{
 
     }
 
-    public function get_team_by_id($uid){
+    public function get_team_by_team($uid){
         $stmt = $this->connect()->prepare("SELECT * FROM teams WHERE team_id = ?");
         $stmt->execute([$uid]);
         if($stmt->rowCount()) {
@@ -30,24 +26,46 @@ Class team extends Dbh{
                 $this->team_name = $row['team_name'];
 			}
         }
+        // SELECT * FROM has_teams t1
+        // join ref_team_roles t2 ON t2.team_role_code = t1.team_role_code
+        // join users t3 ON t3.user_id = t1.participant_id
+        $query = 'SELECT * FROM has_teams t1 join ref_team_roles t2 ON t2.team_role_code = t1.team_role_code join users t3 ON t3.user_id = t1.participant_id where team_id = ?';
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute([$this->team_id]);
+        if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $user = new user;
+                $user->user_first_name = $row['user_first_name'];
+                $user->user_last_name = $row['user_last_name'];
+                $user->user_email = $row['user_email'];
+                $user->user_id = $row['user_id'];
+                $user->team_role = $row['team_role_description'];
+                $this->member_list[] = $user;
+			}
+        }
     }
 
 
-    public function join_team(){
-        $insert_query =
-		"INSERT INTO". " teams " .
-		"SET ".
-		"team_id = '"    	    . $this->team_id			    .   "', "
-        ;
-        
-        $result = $this->connect()->query($insert_query);
+    public function join_team($user_id,$team_id,$team_role_code){
+
+        try {
+            $sql = "INSERT INTO has_teams (team_id, participant_id, team_role_code) VALUES (:team_id, :participant_id, :team_role_code)";
+            $stmt= $this->connect()->prepare($sql);
+            $stmt->bindParam(':team_id', $team_id);
+            $stmt->bindParam(':participant_id', $user_id);
+            $stmt->bindParam(':team_role_code', $team_role_code);
+            $stmt->execute();
+        }catch (Exception $e){
+            $pdo->rollback();
+            throw $e;
+        }
     }
 
-    public function join_team(){
-		$stmt = $this->connect()->prepare("DELETE FROM events WHERE event_id=?");
-        $stmt->execute([$this->event_id]);
-        if(!($stmt->rowCount())) echo "Deletion failed";
-    }
+    // public function join_team(){
+	// 	$stmt = $this->connect()->prepare("DELETE FROM events WHERE event_id=?");
+    //     $stmt->execute([$this->event_id]);
+    //     if(!($stmt->rowCount())) echo "Deletion failed";
+    // }
 
     public function set_session(){
         $eventObj= new event;
