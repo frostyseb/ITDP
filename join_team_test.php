@@ -1,0 +1,7 @@
+<?php
+
+include_once "includes/dbh.inc.php";
+include_once "includes/user.inc.php";
+include_once "includes/team.inc.php";
+
+$team = new team;
