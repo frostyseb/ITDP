@@ -1,4 +1,6 @@
 <?php 
+
+session_start();
 include_once('../includes/fetchAttendance.php'); 
 include_once("../includes/dbh.inc.php");
 include_once("../includes/event.inc.php");
@@ -13,12 +15,10 @@ $uid = $_SESSION['user_id'];
 $trainingHrs = new Attendance;
 $trainingHrs->get_training_hours($uid);
 
-echo $_SESSION['user_name'];
-
 $event = new event;
 $hour_completed = $event->count_trained_hour($_SESSION['user_id']);
 $team = new team;
-$team->get_team_by_team(1);
+$team->get_team_by_team($_SESSION['user_id']);
 
 
 ?>
@@ -85,6 +85,8 @@ $team->get_team_by_team(1);
 								<li><?php echo $_SESSION['user_gender']?></li>
 								<li>Role:</li>
 								<li><?php echo $_SESSION['user_role_code']?></li>
+                                <li>User ID:</li>
+								<li><?php echo $_SESSION['user_id']?></li>
                             </ul>
                         </li>
                             </ul>

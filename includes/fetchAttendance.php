@@ -1,7 +1,4 @@
 <?php
-
-session_start();
-
 include_once('dbh.inc.php');
 include_once('user.inc.php');
 include_once('event.inc.php');
