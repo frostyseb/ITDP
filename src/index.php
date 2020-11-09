@@ -345,11 +345,35 @@ else {
 									<div class="card-header">
 										<strong>Committee Feedback</strong>
 									</div>
-									<div class="card-body card-block">
-										<form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+									<div class="card-body card-block"> 
+										<form action="team_process.php" method="post" enctype="multipart/form-data" class="form-horizontal">
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label class=" form-control-label">Username</label>
+													<label class=" form-control-label">Choose a member</label>
+                                                        <select name="user_id" id="user_id">
+                                                        <?php foreach ($team->member_list as $member){ 
+                                                    ?>
+                                                            <option value="<?php echo $member->user_id ?>"><?php echo $member->user_first_name . " " . $member->user_last_name ?></option>
+                                                        <?php }?>
+                                                        </select>
+                                                        <input type="hidden" name="team_id" value ="<?php echo $team->team_id?>">
+												</div>
+												<div class="col-12 col-md-9">
+													<p class="form-control-static"><!-- add in name --></p>
+												</div>
+											</div>
+                                            <div class="row form-group">
+												<div class="col col-md-3">
+													<label class=" form-control-label">Choose a member</label>
+                                                        <select name="event_id" id="event_id">
+                                                        <?php 
+                                                        $joined_events = $event->get_joined_event($_SESSION['user_id']);
+                                                        foreach ($joined_events as $event) {
+                                                    ?>  
+                                                            <option value="<?php echo $event->event_id ?>"><?php echo $event->event_name ?></option>
+                                                        <?php }?>
+                                                        </select>
+                                                        <input type="hidden" name="team_id" value ="<?php echo $team->team_id?>">
 												</div>
 												<div class="col-12 col-md-9">
 													<p class="form-control-static"><!-- add in name --></p>
@@ -360,13 +384,13 @@ else {
 													<label for="textarea-input" class=" form-control-label">Feedback</label>
 												</div>
 												<div class="col-12 col-md-9">
-													<textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+													<textarea name="feedback" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
 												</div>
 											</div>
 										</form>
 									</div>
 									<div class="card-footer">
-										<button type="submit" class="btn btn-primary btn-sm">
+										<button type="submit" onclick="submit()"class="btn btn-primary btn-sm">
 											<i class="fa fa-dot-circle-o"></i> Submit
 										</button>
 										<button type="reset" class="btn btn-danger btn-sm">
