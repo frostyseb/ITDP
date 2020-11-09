@@ -1,3 +1,9 @@
+<?php 
+include_once('../../includes/fetchAttendance.php'); 
+$trainingHrs = new Attendance;
+$trainingHrs->get_training_hours($_SESSION['user_id']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +88,7 @@
                             <div class="col-md-12">
 							<!-- TRAININGS DATA-->
                                 <h2 class="title-1 m-b-25">Trainings Details</h2>
-								<h6 class="title-5 m-b-25"> Hours completed : <!-- add in hours --></h6>
+								<h6 class="title-5 m-b-25"> Hours completed : <?php echo $trainingHrs->training_hours?></h6>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -97,8 +103,8 @@
                                         </thead>
                                         <!-- PHP CODE TO FETCH DATA FROM ROWS
 										<?php   // LOOP TILL END OF DATA  
-											while($rows=$result->fetch_assoc()) 
-											{ 
+											//while($rows=$result->fetch_assoc()) 
+											//{ 
 										?> 
 										END PHP-->
 										<tbody>
@@ -118,7 +124,7 @@
                                 </div>
                             </div>
 							<!-- END TRAININGS DATA-->
-							
+						</div>	
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- EVENT DATA-->
@@ -140,8 +146,8 @@
                                             </thead>
 											<!-- PHP CODE TO FETCH DATA FROM ROWS
 											<?php   // LOOP TILL END OF DATA  
-												while($rows=$result->fetch_assoc()) 
-												{ 
+												//while($rows=$result->fetch_assoc()) 
+												//{ 
 											?> 
 											END PHP-->
                                             <tbody>
@@ -198,8 +204,8 @@
                                         <table class="table">
 											<!-- PHP CODE TO FETCH DATA FROM ROWS
 											<?php   // LOOP TILL END OF DATA  
-												while($rows=$result->fetch_assoc()) 
-												{ 
+												//while($rows=$result->fetch_assoc()) 
+												//{ }
 											?> 
 											END PHP-->
                                             <tbody>
@@ -221,40 +227,40 @@
                             </div>
 							
 							<div class="col-lg-6">
-							<div class="card">
-								<div class="card-header">
-									<strong>Committee Feedback</strong>
-								</div>
-								<div class="card-body card-block">
-									<form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label class=" form-control-label">Username</label>
+								<div class="card">
+									<div class="card-header">
+										<strong>Committee Feedback</strong>
+									</div>
+									<div class="card-body card-block">
+										<form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label class=" form-control-label">Username</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<p class="form-control-static"><!-- add in name --></p>
+												</div>
 											</div>
-											<div class="col-12 col-md-9">
-												<p class="form-control-static"><!-- add in name --></p>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="textarea-input" class=" form-control-label">Feedback</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+												</div>
 											</div>
-										</div>
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="textarea-input" class=" form-control-label">Feedback</label>
-											</div>
-											<div class="col-12 col-md-9">
-												<textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="card-footer">
-									<button type="submit" class="btn btn-primary btn-sm">
-										<i class="fa fa-dot-circle-o"></i> Submit
-									</button>
-									<button type="reset" class="btn btn-danger btn-sm">
-										<i class="fa fa-ban"></i> Reset
-									</button>
+										</form>
+									</div>
+									<div class="card-footer">
+										<button type="submit" class="btn btn-primary btn-sm">
+											<i class="fa fa-dot-circle-o"></i> Submit
+										</button>
+										<button type="reset" class="btn btn-danger btn-sm">
+											<i class="fa fa-ban"></i> Reset
+										</button>
+									</div>
 								</div>
 							</div>
-						</div>
                         </div>
                         
 						
