@@ -1,3 +1,7 @@
+<?php
+include_once('../includes/fetchAttendance.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
