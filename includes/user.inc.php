@@ -18,12 +18,45 @@ class User extends dbh {
 		$stmt->execute([$this->user_id]);
 		
 		if($stmt->rowCount()) {
-			while ($row = $stmt->fetch())
+			while ($row = $stmt->fetch()) {
+				$this->user_id = $row['user_id'];
+				$this->user_name = $row['user_name'];
+				$this->user_first_name = $row['user_first_name'];
+				$this->user_last_name = $row['user_last_name'];
+				$this->user_password = $row['user_password'];
+				$this->user_email = $row['user_email'];
+				$this->user_gender = $row['user_gender'];
+				$this->user_role_code = $row['user_role_code'];
+			}
 		}
+		$this->setSession();
 	}
 	
 	private function setSession() {
-		$_SESSION['
+		$_SESSION['user_id'] = $this->user_id;
+		$_SESSION['user_name'] = $this->user_name;
+		$_SESSION['user_first_name'] = $this->user_first_name;
+		$_SESSION['user_last_name'] = $this->user_last_name;
+		$_SESSION['user_email'] = $this->user_email;
+		switch($this->user_gender) {
+			case 'M':
+				$_SESSION['user_gender'] = 'Female';
+				break;
+			case 'F':
+				$_SESSION['user_gender'] = 'Male';
+				break;
+		}
+		switch($this->user_role_code) {
+			case 0:
+				$_SESSION['user_role_code'] = 'Participant';
+				break;
+			case 1:
+				$_SESSION['user_role_code'] = 'Committee Lead';
+				break;
+			case 2:
+				$_SESSION['user_role_code'] = 'Program Manager';
+				break;
+		}
 	}
 }
 
