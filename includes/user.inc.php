@@ -13,6 +13,36 @@ class User extends dbh {
 	private $user_gender;
 	private $user_role_code;
 	
+	public function checkUser($udArray = array()){
+		if(!empty($udArray)){
+
+			$this->setUserDataArray($udArray);
+
+			$stmt = $this->connect()->query($this->user_id);
+			if($stmt->rowCount()){
+				//_dump($this->userDataArray);
+				$update = $this->connect()->query($this->updateUser);
+				//echo "There is data";
+			}
+			else{
+				$insert = $this->connect()->query($this->insertUser);
+				$stmt = $this->connect()->prepare("UPDATE TABLE users SET gender=? WHERE oauth_id=?");
+				$stmt->execute([" "]);
+				//echo "No data in database";
+			}
+
+			$userData = $stmt->fetch();
+
+		}
+		 $this->fetchUser();
+		//return $userData;
+    }
+	
+	private function setUserDataArray($array = array()) {
+		$this->userDataArray = $array;
+		$this->separateFromArray();
+	}
+	
 	public function fetchUser() {
 		$stmt = $this->connect()->prepare("SELECT * FROM USERS WHERE user_id=?");
 		$stmt->execute([$this->user_id]);
