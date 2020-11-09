@@ -1,3 +1,9 @@
+<?php
+//include_once('../includes/fetchAttendance.php');
+//$event_drop = new Attendance;
+//$event_drop->get_feedback();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,6 +104,9 @@
 									<div class="col-12 col-lg-9">
 										<select class="form-control" name="users" onchange="showUser(this.value)">
 											<option value="0">Please select</option>
+											<?php 
+											//foreach($event_drop->event_id as $)
+											?>
 											<option value="1">Option #1</option>
 											<option value="2">Option #2</option>
 											<option value="3">Option #3</option>

@@ -7,6 +7,7 @@ include_once('dbh.inc.php');
 class attendance extends Dbh {
 	
 	public $training_hours;
+	public $event_name;
 	
 	
 	public function get_training_hours($uid) {
@@ -17,6 +18,20 @@ class attendance extends Dbh {
 				$this->training_hours = $row['hour_attended'];
 			}
 		}
+	}
+	
+	public function get_feedback() {
+		$stmt = $this->connect()->prepare("SELECT * FROM feedbacks t1
+        JOIN users t2 ON t2.user_id = t1.participant_id
+        JOIN users t3 ON t3.user_id = t1.committee_lead_id
+        JOIN events t4 ON t4.event_id = t1.event_id");
+		$stmt->execute();
+		if($stmt->rowCount()) {
+			while($row = $stmt->fetch()) {
+				$this->event_name  = $row['event_name'];
+			}
+		}
+		
 	}
 }
 

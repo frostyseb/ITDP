@@ -145,37 +145,46 @@ $trainingHrs->get_training_hours($uid);
                                                     <td>Name</td>
                                                     <td>Date</td>
                                                     <td>Description</td>
-													<td>Cost</td>
+													<td>Hours</td>
 													<td></td>
                                                 </tr>
                                             </thead>
 											<!-- PHP CODE TO FETCH DATA FROM ROWS
 											<?php   // LOOP TILL END OF DATA  
-												//while($rows=$result->fetch_assoc()) 
-												//{ 
+												$con = mysqli_connect('localhost','root','','itdp'); //EDIT DATABASE CONNECTION
+												if (!$con) {
+												  die('Could not connect: ' . mysqli_error($con));
+												}
 											?> 
 											END PHP-->
                                             <tbody>
+											<?php
+											
+												$records = mysqli_query($con,"select * from events"); // fetch data from database
+
+												while($data = mysqli_fetch_array($records))
+												{
+											?>
                                                 <tr>
                                                     <td>
                                                         <div class="table-data__info">
-                                                            <h6>test<!-- add in event name --></h6>
+                                                            <h6><?php echo $data['event_name'] ?></h6>
+                                                        </div>
+                                                    </td>
+													
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h6><?php echo $data['event_start_date'] ?></h6>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="table-data__info">
-                                                            <h6>test<!-- add in eventTime --></h6>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-data__info">
-                                                            <h6>test to see if long description fits in the box perfectly.
-															testing,testing,testing,testing,testing,testing,testing,testing,<!-- add in event description --></h6>
+                                                            <h6><?php echo $data['other_details'] ?></h6>
                                                         </div>
                                                     </td>
 													<td>
                                                         <div class="table-data__info">
-                                                            <h6>test<!-- add in eventTime --></h6>
+                                                            <h6><?php echo $data['number_of_participants'] ?></h6>
                                                         </div>
                                                     </td>
 													<td>
@@ -184,6 +193,9 @@ $trainingHrs->get_training_hours($uid);
 														</button>
                                                     </td>
                                                 </tr>
+											<?php 
+												}
+											?>
                                             </tbody>
                                         </table>
                                     </div>
