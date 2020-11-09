@@ -2,6 +2,10 @@
 //include_once('../includes/fetchAttendance.php');
 //$event_drop = new Attendance;
 //$event_drop->get_feedback();
+
+include_once('../team_test2.php');
+$team = new team;
+$team->get_team_by_team(1);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +42,6 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-
 
 </head>
 
@@ -142,6 +145,14 @@
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
+										<!-- PHP CODE TO FETCH DATA FROM ROWS
+											<?php   // LOOP TILL END OF DATA  
+												$con = mysqli_connect('localhost','root','','itdp'); //EDIT DATABASE CONNECTION
+												if (!$con) {
+												  die('Could not connect: ' . mysqli_error($con));
+												}
+											?> 
+											END PHP-->
                                             <tr>
 												<th>
 													<label class="au-checkbox">
@@ -150,10 +161,10 @@
 													</label>
                                                 </th>
                                                 <th>Name</th>
-                                                <th>Date</th>
+                                                <th>Start Date</th>
+												<th>End Date</th>
                                                 <th>Description</th>
-                                                <th>Cost</th>
-												<th>Venue</th>
+                                                <th>Hours</th>
 												<th></th>
                                             </tr>
                                         </thead>
@@ -164,6 +175,13 @@
 										?> 
 										END PHP-->
 										<tbody>
+										<?php
+											
+												$records = mysqli_query($con,"select * from events"); // fetch data from database
+
+												while($data = mysqli_fetch_array($records))
+												{
+											?>
                                             <tr>
 											<td>
                                                     <label class="au-checkbox">
@@ -171,11 +189,11 @@
                                                         <span class="au-checkmark"></span>
                                                     </label>
                                                 </td>
-                                                <td>test<!-- add in name --></td>
-                                                <td>test<!-- add in date--></td>
-                                                <td>test<!-- add in description --></td>
-                                                <td>test<!-- cost--></td>
-												<td>test<!-- venue--></td>
+                                                <td><?php echo $data['event_name'] ?></td>
+                                                <td><?php echo $data['event_start_date'] ?></td>
+												<td><?php echo $data['event_end_date'] ?></td>
+                                                <td><?php echo $data['other_details'] ?></td>
+                                                <td><?php echo $data['number_of_participants'] ?></td>
 												<td>
                                                     <div class="table-data-feature">
                                                         <button class="item" data-toggle="modal" data-target="#editEvent" data-placement="top" title="Edit">
@@ -187,6 +205,9 @@
                                                     </div>
                                                 </td>
                                             </tr>
+											<?php 
+												}
+											?>
 										</tbody>
                                     </table>
                                 </div>
@@ -201,41 +222,28 @@
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th>Username</th>
+                                                <th>User ID</th>
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
 												<th>Email</th>
-												<th>Gender</th>
+												<th>Team Role</th>
                                             </tr>
                                         </thead>
-                                        <!-- PHP CODE TO FETCH DATA FROM ROWS
-										<?php   // LOOP TILL END OF DATA  
-											//while($rows=$result->fetch_assoc()) 
-											//{ 
-										?> 
-										END PHP-->
 										<tbody>
+										<?php
+												foreach ($team->member_list as $member)
+												{
+										?>
                                             <tr>
-                                                <td>test<!-- add in username --></td>
-                                                <td>test<!-- add in first name--></td>
-                                                <td>test<!-- add in last name --></td>
-												<td>test<!-- email--></td>
-												<td>test<!-- gender --></td>
+                                                <td><?php echo $member->user_id ?></td>
+                                                <td><?php echo $member->user_first_name ?></td>
+                                                <td><?php echo $member->user_last_name ?></td>
+												<td><?php echo $member->user_email ?></td>
+												<td><?php echo $member->team_role ?></td>
 											</tr>
-											<tr>
-                                                <td>test<!-- add in username --></td>
-                                                <td>test<!-- add in first name--></td>
-                                                <td>test<!-- add in last name --></td>
-												<td>test<!-- email--></td>
-												<td>test<!-- gender --></td>
-											</tr>
-											<tr>
-                                                <td>test<!-- add in username --></td>
-                                                <td>test<!-- add in first name--></td>
-                                                <td>test<!-- add in last name --></td>
-												<td>test<!-- email--></td>
-												<td>test<!-- gender --></td>
-                                            </tr>
+											<?php 
+												}
+											?>
 										</tbody>
                                     </table>
                                 </div>
