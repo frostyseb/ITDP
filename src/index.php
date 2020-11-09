@@ -19,9 +19,13 @@ $trainingHrs->get_training_hours($uid);
 $event = new event;
 $hour_completed = $event->count_trained_hour($_SESSION['user_id']);
 $team = new team;
-$team->get_team_by_team($_SESSION['user_id']);
+$team->get_team_by_user($_SESSION['user_id']);
+$team->get_team_by_team($team->team_id);
 
 $result = $team->get_team_role_code($_SESSION['user_id']);
+
+$event = new event;
+$train_events = $event->get_training();
 
 if($result == 1) {
 	$hideme = '#user {display: none;}';
@@ -143,21 +147,23 @@ else {
 										<?php   // LOOP TILL END OF DATA  
 											//while($rows=$result->fetch_assoc()) 
 											//{ 
+                                            foreach ($train_events as $event) {
 										?> 
 										END PHP-->
 										<tbody>
                                             <tr>
-                                                <td>test<!-- add in training name --></td>
-                                                <td>test<!-- add in start date--></td>
-                                                <td>test<!-- add in end date --></td>
-                                                <td>test<!-- add in status (pending, in progress, done)--></td>
-												<td>test<!-- add in description--></td>
+                                                <td><?php echo $event->event_name?></td>
+                                                <td><?php echo $event->event_start_date?></td>
+                                                <td><?php echo $event->event_end_date?></td>
+                                                <td><?php echo $event->event_status_description?></td>
+												<td><?php echo $event->other_details?></td>
 												<td> <button type="button" class="btn btn-secondary mb-1">
 															JOIN <!-- SCROLL DOWN TO FIND MODAL -->
 													</button>
 												</td>
                                             </tr>
 										</tbody>
+                                        <?php } ?>
                                     </table>
                                 </div>
                             </div>

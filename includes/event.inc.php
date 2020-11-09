@@ -80,6 +80,8 @@ Class event extends Dbh{
                 $event->comments = $row['comments'];
                 $event->other_details = $row['other_details'];
                 $event->total_hour_required = $row['total_hour_required'];
+                $event->event_start_date = $row['event_start_date'];
+                $event->event_end_date = $row['event_end_date'];
                 $event_list[] = $event;
 			}
         }
