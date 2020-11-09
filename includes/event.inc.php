@@ -101,6 +101,7 @@ Class event extends Dbh{
                 $max = $row['num'];
 			}
         }
+        if (!$max) $max = 0;
         return $max;
     }
 
