@@ -13,6 +13,9 @@ class User extends dbh {
 	private $user_gender;
 	private $user_role_code;
 	
+	private $insertUser;
+	private $updateUser;
+	
 	public function checkUser($udArray = array()){
 		if(!empty($udArray)){
 
@@ -26,7 +29,7 @@ class User extends dbh {
 			}
 			else{
 				$insert = $this->connect()->query($this->insertUser);
-				$stmt = $this->connect()->prepare("UPDATE TABLE users SET gender=? WHERE oauth_id=?");
+				$stmt = $this->connect()->prepare("UPDATE TABLE users SET gender=? WHERE user_id=?");
 				$stmt->execute([" "]);
 				//echo "No data in database";
 			}
@@ -42,6 +45,54 @@ class User extends dbh {
 		$this->userDataArray = $array;
 		$this->separateFromArray();
 	}
+	
+	private function separateFromArray(){
+		$this->user_id = $this->userDataArray['user_id'];
+		$this->user_name = $this->userDataArray['user_name'];
+		$this->user_first_name = $this->userDataArray['user_first_name'];
+		$this->user_last_name = $this->userDataArray['user_last_name'];
+		$this->user_password = $this->userDataArray['user_password'];
+		$this->user_email = $this->userDataArray['user_email'];
+		$this->user_gender = $this->userDataArray['user_gender'];
+		 
+		$this->user_id = 
+		"SELECT * FROM" .$this->tableName. 
+		"WHERE user_id = '" . $this->user_id . "'";
+
+		$this->insertUser =
+		"INSERT INTO". $this->tableName .
+		"SET ".
+		"user_id = '"      		. $this->user_id  			.   "', " .
+		"user_name = '"    		. $this->user_name			.   "', " .
+		"user_first_name = '"   . $this->user_first_name    .   "', " .
+		"user_last_name = '"    . $this->user_last_name    	.   "', " .
+		"user_password = '"     . $this->user_password    	.   "', " .
+		"user_email = '"        . $this->user_email    		.   "', " .
+		"user_gender = '"       . $this->user_gender    	.   "', " .
+		"created = '"      . date("Y-m-d H:i:s") . "', ".
+		"modified = '"     . date("Y-m-d H:i:s") . "' "
+		;
+
+		$this->updateUser = 
+		"UPDATE". $this->tableName .
+		"SET ".
+		"user_name = '"   		. $this->user_name    		.   "', " .
+		"user_first_name = '"   . $this->user_first_name    .   "', " .
+		"user_last_name = '"    . $this->user_last_name    	.   "', " .
+		"user_email = '"        . $this->user_email    		.   "', " .
+		"user_password = '"     . $this->password    		.   "', " .
+		"user_gender = '"        . $this->user_gender    	.   "', " .
+		"modified = '"     . date("Y-m-d H:i:s") . "' ".
+		"WHERE ".
+		"user_id ='"       .   $this->user_id    .   "'"
+		;
+
+	}
+	
+	public function updateGender($gender){
+		$stmt = $this->connect()->prepare("UPDATE users SET gender=? WHERE user_id=?");
+		$stmt->execute([$user_gender,$this->user_id]);
+    }
 	
 	public function fetchUser() {
 		$stmt = $this->connect()->prepare("SELECT * FROM USERS WHERE user_id=?");
