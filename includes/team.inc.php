@@ -66,6 +66,18 @@ Class team extends Dbh{
         }
     }
 
+    // public function get_team_role_code_m($uid){
+    //     $sql = "SELECT team_role_code FROM has_team WHERE participant_id=:participant_id";
+    //     $stmt= $this->connect()->prepare($sql);
+    //     $stmt->bindParam(':participant_id', $uid);
+    //     $stmt->execute();
+    //     if($stmt->rowCount()) {
+	// 		while ($row = $stmt->fetch()) {
+    //             $this->
+	// 		}
+    //     }
+    // }
+
 
     public function join_team($user_id,$team_id,$team_role_code){
         $sql = "SELECT COUNT(*) AS num FROM has_teams WHERE team_id=:team_id AND participant_id=:participant_id";

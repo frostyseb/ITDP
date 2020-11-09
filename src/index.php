@@ -21,7 +21,8 @@ $hour_completed = $event->count_trained_hour($_SESSION['user_id']);
 $team = new team;
 $team->get_team_by_user($_SESSION['user_id']);
 $team->get_team_by_team($team->team_id);
-
+$team->get_team_role_code($_SESSION['user_id']);
+$trc = $team->t_r_c;
 $result = $team->get_team_role_code($_SESSION['user_id']);
 
 $event = new event;
@@ -336,7 +337,9 @@ else {
                                 </div>
                                 <!-- END COMMITTEE-->
                             </div>
-							
+                            <?php
+                                if($trc == 2){
+                            ?>
 							<div class="col-lg-6" id="user">
 								<div class="card">
 									<div class="card-header">
@@ -373,7 +376,9 @@ else {
 								</div>
 							</div>
                         </div>
-                        
+                        <?php
+                                }
+                        ?>
 						
                     </div>
                 </div>
