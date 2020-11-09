@@ -1,24 +1,39 @@
 <?php
 
-Class event extends dbh{
-    public $event_id
-    public $event_status_code
-    public $events_status_name
-    public $event_type_code
-    public $event_type_description
-    public $event_start_date
-    public $event_end_date
-    public $number_of_participants
-    public $discount
-    public $total_cost
-    public $comments
-    public $other_details
-    public $event_name
-    public $total_hour_required
+Class event extends Dbh{
+    public $event_id;
+    public $event_status_code;
+    public $event_status_description;
+    public $event_type_code;
+    public $event_type_description;
+    public $event_start_date;
+    public $event_end_date;
+    public $number_of_participants;
+    public $discount;
+    public $total_cost;
+    public $comments;
+    public $other_details;
+    public $event_name;
+    public $total_hour_required;
+
+    public $joined_array = array();
+    public $unjoin_array = array();
 
     public function add_events(){
 
     }
+
+    public function get_event_by_eventid($uid){
+        $stmt = $this->connect()->prepare("SELECT * FROM events WHERE event_id = ?");
+        $stmt->execute([$uid]);
+        if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $this->event_id = $row['event_id'];
+                $this->event_name = $row['event_name'];
+			}
+        }
+    }
+
 
     public function edit_events(){
         $stmt = $this->connect()->prepare(
@@ -34,10 +49,10 @@ Class event extends dbh{
     }
 
     public function set_session(){
-        $eventObj= new event();
+        $eventObj= new event;
         $eventObj->event_id= $this->event_id;
         $eventObj->event_status_code= $this->event_status_code;
-        $eventObj->events_status_name= $this->events_status_name;
+        $eventObj->event_status_description= $this->event_status_description;
         $eventObj->event_type_code= $this->event_type_code;
         $eventObj->event_type_description= $this->event_type_description;
         $eventObj->event_start_date= $this->event_start_date;
@@ -61,17 +76,72 @@ Class event extends dbh{
 
     }
 
-    public function get_all_event(){
+    public function get_all_event($uid){
         // $query = "SELECT * FROM events t1 join ref_event_types t2 ON t2.event_type_code = t1.event_type_code join ref_event_status t3 ON t3.event_status_code = t1.event_status_code"
-        $joined_query = "SELECT * FROM events t1". 
-        "join ref_event_types t2 ON t2.event_type_code = t1.event_type_code".
-        "join ref_event_status t3 ON t3.event_status_code = t1.event_status_code".
-        "join attendances t4 ON t4.event_id = t1.event_id".
-        "join users t5 ON t5.user_id = t4.user_id";
 
+        // SELECT * FROM events t1
+        // join ref_event_types t2 ON t2.event_type_code = t1.event_type_code
+        // join ref_event_status t3 ON t3.event_status_code = t1.event_status_code
+        // join attendances t4 ON t4.event_id = t1.event_id
+        // join users t5 ON t5.user_id = t4.user_id WHERE t4.user_id = 1
 
+        $joined_query = "SELECT * FROM events t1 join ref_event_types t2 ON t2.event_type_code = t1.event_type_code join ref_event_status t3 ON t3.event_status_code = t1.event_status_code join attendances t4 ON t4.event_id = t1.event_id join users t5 ON t5.user_id = t4.user_id WHERE t4.user_id = ?";
         
+        // $unjoin_query = "SELECT * FROM events WHERE event_id not in (SELECT event_id FROM attendances WHERE user_id = ?)";
+        //SELECT * FROM events t1 join ref_event_types t2 ON t2.event_type_code = t1.event_type_code join ref_event_status t3 ON t3.event_status_code = t1.event_status_code WHERE t1.event_id not in (SELECT event_id FROM attendances WHERE user_id = 1)
+       
+        // SELECT * FROM events t1
+        // join ref_event_types t2 ON t2.event_type_code = t1.event_type_code
+        // join ref_event_status t3 ON t3.event_status_code = t1.event_status_code
+        // WHERE t1.event_id not in (SELECT event_id FROM attendances WHERE user_id = 1)
+        $unjoin_query_full = 'SELECT * FROM events t1 join ref_event_types t2 ON t2.event_type_code = t1.event_type_code join ref_event_status t3 ON t3.event_status_code = t1.event_status_code WHERE t1.event_id not in (SELECT event_id FROM attendances WHERE user_id = ?)';
+        $stmt = $this->connect()->prepare($joined_query);
+		$stmt->execute([$uid]);
+		if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $eventObj= new event;
+                $eventObj->event_id= $row['event_id'];
+                $eventObj->event_status_code= $row['event_status_code'];
+                $eventObj->event_status_description= $row['event_status_description'];
+                $eventObj->event_type_code= $row['event_type_code'];
+                $eventObj->event_type_description= $row['event_type_description'];
+                $eventObj->event_start_date= $row['event_start_date'];
+                $eventObj->event_end_date= $row['event_end_date'];
+                $eventObj->number_of_participants= $row['number_of_participants'];
+                $eventObj->discount= $row['discount'];
+                $eventObj->total_cost= $row['total_cost'];
+                $eventObj->comments= $row['comments'];
+                $eventObj->other_details= $row['other_details'];
+                $eventObj->event_name= $row['event_name'];
+                $eventObj->total_hour_required= $row['total_hour_required'];
+				$this->joined_array[] = $eventObj;
+			}
+        }
+
+        $stmt = $this->connect()->prepare($unjoin_query_full);
+        $stmt->execute([$uid]);
+		if($stmt->rowCount()) {
+			while ($row = $stmt->fetch()) {
+                $eventObj= new event();
+                $eventObj->event_id= $row['event_id'];
+                $eventObj->event_status_code= $row['event_status_code'];
+                $eventObj->event_status_description= $row['event_status_description'];
+                $eventObj->event_type_code= $row['event_type_code'];
+                $eventObj->event_type_description= $row['event_type_description'];
+                $eventObj->event_start_date= $row['event_start_date'];
+                $eventObj->event_end_date= $row['event_end_date'];
+                $eventObj->number_of_participants= $row['number_of_participants'];
+                $eventObj->discount= $row['discount'];
+                $eventObj->total_cost= $row['total_cost'];
+                $eventObj->comments= $row['comments'];
+                $eventObj->other_details= $row['other_details'];
+                $eventObj->event_name= $row['event_name'];
+                $eventObj->total_hour_required= $row['total_hour_required'];
+				$this->unjoin_array[] = $eventObj;
+			}
+        }        
     }
+
 
 
 }
